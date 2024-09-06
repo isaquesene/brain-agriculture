@@ -72,7 +72,7 @@ const Sidebar = () => {
     <div className={sidebarClassNames}>
         {/* LOGO */}
         <div className={`flex gap-3 justify-between md:justify-normal items-center pt-8 ${isSidebarCollapsed ? "px-5" : "px-8"}`}>
-            <div>logo</div>
+            {/**<div>logo</div>*/}
             <h1 className={`${isSidebarCollapsed ? "hidden" : "block"} font-extrabold text-2xl`}>BrAgroculture</h1>
 
             <button 
@@ -91,7 +91,7 @@ const Sidebar = () => {
                 isCollapsed={isSidebarCollapsed}
             />
              <SidebarLink 
-                href='#'
+                href='/produtores'
                 icon={Sprout}
                 label="Produtores"
                 isCollapsed={isSidebarCollapsed}
