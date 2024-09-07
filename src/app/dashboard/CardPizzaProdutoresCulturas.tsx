@@ -19,22 +19,22 @@ const CardPieChartByCulture = () => {
   }, []) || [];
 
   return (
-    <div className="row-span-3 bg-white shadow-md rounded-2xl flex flex-col justify-between">
+    <div className="row-span-3 bg-white shadow-md rounded-2xl flex flex-col justify-between p-4">
       {isLoading ? (
         <div className="m-5">Carregando...</div>
       ) : (
         <>
           {/* HEADER */}
           <div>
-            <h2 className="text-lg font-semibold mb-2 px-7 pt-5">
+            <h2 className="text-lg font-semibold mb-2">
               Fazendas por Cultura
             </h2>
             <hr />
           </div>
           {/* BODY */}
-          <div className="xl:flex justify-between pr-7">
+          <div className="xl:flex xl:justify-between gap-4">
             {/* CHART */}
-            <div className="relative basis-3/5">
+            <div className="relative flex-1">
               <ResponsiveContainer width="100%" height={140}>
                 <PieChart>
                   <Pie
@@ -58,19 +58,20 @@ const CardPieChartByCulture = () => {
               </div>
             </div>
             {/* LABELS */}
-            <ul className="flex flex-col justify-around items-center xl:items-start py-5 gap-3">
-              {pieData.map((entry) => (
-                <li key={entry.name} className="flex items-center text-xs">
-                  <span
-                    className="inline-block w-3 h-3 rounded-full"
-                    style={{ backgroundColor: colors[pieData.indexOf(entry) % colors.length] }}
-                  ></span>
-                  <span>{entry.name}: {entry.value}</span>
-                </li>
-              ))}
-            </ul>
+            <div className="flex-1 overflow-auto">
+              <ul className="flex flex-col gap-2">
+                {pieData.map((entry) => (
+                  <li key={entry.name} className="flex items-center text-xs">
+                    <span
+                      className="inline-block w-3 h-3 rounded-full mr-2"
+                      style={{ backgroundColor: colors[pieData.indexOf(entry) % colors.length] }}
+                    ></span>
+                    <span className="truncate" style={{ maxWidth: '150px' }}>{entry.name}: {entry.value}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div></div>
         </>
       )}
     </div>

@@ -11,6 +11,7 @@ import {
     Menu,
     SlidersHorizontal,
     Sprout,
+    UsersRound,
     User,
   } from "lucide-react";
 import { usePathname } from 'next/navigation';
@@ -94,6 +95,12 @@ const Sidebar = () => {
                 href='/produtores'
                 icon={Sprout}
                 label="Produtores"
+                isCollapsed={isSidebarCollapsed}
+            />
+            <SidebarLink 
+                href='#'
+                icon={UsersRound}
+                label="Usuários"
                 isCollapsed={isSidebarCollapsed}
             />
         </div>

@@ -1,37 +1,36 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export interface NewProdutores {
-    produtorId:       String;
-    cpf:              String;
-    cnpj:             String;
-    nome:             String;
-    nomeFazenda:      String;
-    cidade:           String;
-    estado:           String;
+    cpf?:             string;
+    cnpj?:            string;
+    nome:             string;
+    nomeFazenda:      string;
+    cidade:           string;
+    estado:           string;
     areaTotal:        number;
     areaAgricultavel: number;
     areaVegetacao:    number;
-    culturas:         String[];
+    culturas:         string[];
 }
 
 export interface Produtores {
-    produtorId:       String;
-    cpf:              String;
-    cnpj:             String;
-    nome:             String;
-    nomeFazenda:      String;
-    cidade:           String;
-    estado:           String;
+    produtorId:       string;
+    cpf?:             string;
+    cnpj?:            string;
+    nome:             string;
+    nomeFazenda:      string;
+    cidade:           string;
+    estado:           string;
     areaTotal:        number;
     areaAgricultavel: number;
     areaVegetacao:    number;
-    culturas:         String[];
+    culturas:         string[];
 }
 
 export interface User {
-    userId:  String;
-    name:    String;
-    email:   String;
+    userId:  string;
+    name:    string;
+    email:   string;
 }
 
 export interface DashboardMetrics {
@@ -40,9 +39,9 @@ export interface DashboardMetrics {
 }
 
 export const api = createApi({
-    baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL}),
+    baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
     reducerPath: 'api',
-    tagTypes: ["DashboardMetrics", "Produtores"],
+    tagTypes: ["DashboardMetrics", "Produtores", "User"],
     endpoints: (build) => ({
         getDashboardMetrics: build.query<DashboardMetrics, void>({
             query: () => "/dashboard",
@@ -53,17 +52,32 @@ export const api = createApi({
                 url: "/produtores",
                 params: search ? {search} : {}
              }),
-            providesTags: ["Produtores"]
+            providesTags: ["Produtores"],
         }),
-        createProdutores: build.mutation<Produtores, NewProdutores>({
+        createProdutor: build.mutation<Produtores, NewProdutores>({
             query: (newProdutores) => ({
                 url: "/produtores",
                 method: "POST",
                 body: newProdutores
             }),
-            invalidatesTags: ["Produtores"]
-        })
+            invalidatesTags: ["Produtores"],
+        }),
+        updateProdutor: build.mutation<Produtores, { id: string, data: NewProdutores }>({
+            query: ({ id, data }) => ({
+                url: `/produtores/${id}`,
+                method: "PUT",
+                body: data
+            }),
+            invalidatesTags: ["Produtores"],
+        }),
+        deleteProdutor: build.mutation<void, string>({
+            query: (produtorId) => ({
+                url: `/produtores/${produtorId}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ["Produtores"],
+        }),
     }),
 });
 
-export const { useGetDashboardMetricsQuery, useGetProdutoresQuery, useCreateProdutoresMutation} = api;
+export const { useGetDashboardMetricsQuery, useGetProdutoresQuery, useCreateProdutorMutation, useUpdateProdutorMutation, useDeleteProdutorMutation } = api;
