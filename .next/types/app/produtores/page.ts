@@ -1,4 +1,4 @@
-// File: C:\Users\DELL\Documents\brain_agriculture\brain_acriculture\src\app\produtores\page.tsx
+// File: C:\Users\DELL\Documents\teste Tinnova\brain-agriculture\src\app\produtores\page.tsx
 import * as entry from '../../../../src/app/produtores/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
