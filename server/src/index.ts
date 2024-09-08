@@ -7,6 +7,7 @@ import morgan from "morgan";
 /* ROTE */
 import dashboardRouters from "./routes/dashboardRoutes";
 import produtoresRouters from "./routes/produtoresRoutes";
+import userRoutes from "./routes/usersRoutes";
 /* CONFIG */
 dotenv.config();
 const app = express();
@@ -20,6 +21,7 @@ app.use(cors());
 
 app.use("/dashboard", dashboardRouters); // http://localhost:8000/dashboard
 app.use("/produtores", produtoresRouters); // http://localhost:8000/produtores
+app.use("/users", userRoutes); // http://localhost:8000/users
 
 /*
 teste no postman

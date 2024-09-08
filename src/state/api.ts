@@ -41,7 +41,7 @@ export interface DashboardMetrics {
 export const api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
     reducerPath: 'api',
-    tagTypes: ["DashboardMetrics", "Produtores", "User"],
+    tagTypes: ["DashboardMetrics", "Produtores", "Users"],
     endpoints: (build) => ({
         getDashboardMetrics: build.query<DashboardMetrics, void>({
             query: () => "/dashboard",
@@ -77,7 +77,18 @@ export const api = createApi({
             }),
             invalidatesTags: ["Produtores"],
         }),
+        getUsers: build.query<User[], void>({
+            query: () => "/users",
+            providesTags: ["Users"],
+        }),
     }),
 });
 
-export const { useGetDashboardMetricsQuery, useGetProdutoresQuery, useCreateProdutorMutation, useUpdateProdutorMutation, useDeleteProdutorMutation } = api;
+export const { 
+    useGetDashboardMetricsQuery, 
+    useGetProdutoresQuery, 
+    useCreateProdutorMutation, 
+    useUpdateProdutorMutation, 
+    useDeleteProdutorMutation,
+    useGetUsersQuery 
+} = api;
