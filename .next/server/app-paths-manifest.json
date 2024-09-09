@@ -1,6 +1,7 @@
 {
-  "/page": "app/page.js",
-  "/produtores/page": "app/produtores/page.js",
   "/dashboard/page": "app/dashboard/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/users/page": "app/users/page.js",
+  "/page": "app/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/produtores/page": "app/produtores/page.js"
 }
