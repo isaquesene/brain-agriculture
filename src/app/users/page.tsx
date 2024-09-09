@@ -1,10 +1,10 @@
 "use client";
 
-import { useGetUsersQuery, useGetProdutoresQuery } from "@/state/api";
+import { useGetUsersQuery } from "@/state/api";
 import Headers from "@/app/(components)/Header";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { PlusCircleIcon, Search, Trash2, Pencil } from "lucide-react";
 import { useState } from "react";
+import { Search } from "lucide-react";
 
 const Users = () => {
   const [searchTerm, setSearchTerm] = useState("");

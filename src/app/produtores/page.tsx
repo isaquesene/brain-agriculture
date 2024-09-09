@@ -1,6 +1,6 @@
 "use client";
 
-import { useCreateProdutorMutation, useGetProdutoresQuery, useUpdateProdutorMutation, useDeleteProdutorMutation } from "@/state/api";
+import { useCreateProdutorMutation, useGetProdutoresQuery, useDeleteProdutorMutation } from "@/state/api";
 import Headers from "@/app/(components)/Header";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { PlusCircleIcon, Search, Trash2, Pencil } from "lucide-react";
@@ -54,7 +54,7 @@ const Produtores = () => {
     }
   };
 
-  const [updateProdutor] = useUpdateProdutorMutation();
+  //const [updateProdutor] = useUpdateProdutorMutation();
   const handleEdit = (produtor) => {
     setSelectedProdutor(produtor);
     setIsEditModalOpen(true);

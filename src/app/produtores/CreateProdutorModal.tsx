@@ -51,7 +51,7 @@ const isValidCnpj = (cnpj: string) => {
 
     let length = cnpj.length - 2;
     let numbers = cnpj.substring(0, length);
-    let digits = cnpj.substring(length);
+    const digits = cnpj.substring(length);
     let sum = 0;
     let pos = length - 7;
     
@@ -129,7 +129,7 @@ const CreateProdutorModal = ({
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
 
-        // Formata CPF e CNPJ durante a digitação
+        // Validação e formatação para CPF e CNPJ
         if (name === "cpf") {
             setFormData({
                 ...formData,
@@ -139,6 +139,34 @@ const CreateProdutorModal = ({
             setFormData({
                 ...formData,
                 cnpj: formatCnpj(value),
+            });
+        }
+        // Tratamento das áreas
+        else if (name === "areaAgricultavel" || name === "areaVegetacao") {
+            const newValue = parseFloat(value) || 0;
+            setFormData((prevData) => {
+                const updatedData = {
+                    ...prevData,
+                    [name]: newValue,
+                    areaTotal:
+                        prevData.areaAgricultavel +
+                        prevData.areaVegetacao +
+                        (name === "areaAgricultavel"
+                            ? newValue - prevData.areaAgricultavel
+                            : newValue - prevData.areaVegetacao),
+                };
+
+                if (
+                    updatedData.areaAgricultavel + updatedData.areaVegetacao >
+                    updatedData.areaTotal
+                ) {
+                    alert(
+                        "A soma da área agricultável e vegetação não pode ser maior que a área total."
+                    );
+                    return prevData;
+                }
+
+                return updatedData;
             });
         } else {
             setFormData({
@@ -151,10 +179,11 @@ const CreateProdutorModal = ({
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
     
-        // Validação da soma das áreas
         const somaAreas = formData.areaAgricultavel + formData.areaVegetacao;
         if (somaAreas > formData.areaTotal) {
-            alert("A soma da área agricultável e vegetação não pode ser maior que a área total.");
+            alert(
+                "A soma da área agricultável e vegetação não pode ser maior que a área total."
+            );
             return;
         }
     
@@ -260,21 +289,11 @@ const CreateProdutorModal = ({
                     </div>
 
                     <div>
-                        <label htmlFor="areaTotal" className={labelCssStyles}>Área Total (ha)</label>
+                        <label htmlFor="areaAgricultavel" className={labelCssStyles}>
+                            Área Agricultável (ha)
+                        </label>
                         <input
-                            type="text"
-                            name="areaTotal"
-                            placeholder="Área total"
-                            onChange={handleChange}
-                            value={formData.areaTotal}
-                            className={inputCssStyles}
-                        />
-                    </div>
-
-                    <div>
-                        <label htmlFor="areaAgricultavel" className={labelCssStyles}>Área Agricultável (ha)</label>
-                        <input
-                            type="text"
+                            type="number"
                             name="areaAgricultavel"
                             placeholder="Área agricultável"
                             onChange={handleChange}
@@ -284,14 +303,30 @@ const CreateProdutorModal = ({
                     </div>
 
                     <div>
-                        <label htmlFor="areaAgricutavel" className={labelCssStyles}>Área Vegetação (ha)</label>
+                        <label htmlFor="areaVegetacao" className={labelCssStyles}>
+                            Área Vegetação (ha)
+                        </label>
                         <input
-                            type="text"
+                            type="number"
                             name="areaVegetacao"
                             placeholder="Área Vegetação"
                             onChange={handleChange}
                             value={formData.areaVegetacao}
                             className={inputCssStyles}
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="areaTotal" className={labelCssStyles}>
+                            Área Total (ha)
+                        </label>
+                        <input
+                            type="number"
+                            name="areaTotal"
+                            placeholder="Área total"
+                            value={formData.areaTotal}
+                            className={inputCssStyles}
+                            readOnly
                         />
                     </div>
 
