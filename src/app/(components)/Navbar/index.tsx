@@ -5,7 +5,6 @@ import { setIsDarkMode, setIsSidebarCollapsed } from "@/state";
 import { Sun, Bell, Menu, Moon, Settings } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import Image from "next/image";
 
 const Navbar = () => {
 

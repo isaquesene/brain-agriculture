@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { useUpdateProdutorMutation, useGetProdutoresQuery } from "@/state/api";
-import { Dialog, DialogActions, DialogContent, DialogTitle, Button } from "@mui/material";
-import { Trash2 } from "lucide-react";
+import { useUpdateProdutorMutation } from "@/state/api";
 import Header from "@/app/(components)/Header";
 
 interface EditProdutorModalProps {

@@ -3,21 +3,15 @@
 import { useAppDispatch, useAppSelector } from '@/app/redux';
 import { setIsSidebarCollapsed } from '@/state';
 import {
-    Archive,
-    CircleDollarSign,
-    Clipboard,
     Layout,
     LucideIcon,
     Menu,
-    SlidersHorizontal,
     Sprout,
     UsersRound,
-    User,
   } from "lucide-react";
 import { usePathname } from 'next/navigation';
 import React from 'react';
 import Link from "next/link";
-import Image from "next/image";
 
 interface SidebarLinkProps {
     href: string;
