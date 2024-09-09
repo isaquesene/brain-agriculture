@@ -48,17 +48,6 @@ export const createProdutor = async (req: Request, res: Response): Promise<void>
             return;
         }
 
-        // Conversão de strings para números, se necessário
-        const parsedAreaTotal = parseFloat(areaTotal);
-        const parsedAreaAgricultavel = parseFloat(areaAgricultavel);
-        const parsedAreaVegetacao = parseFloat(areaVegetacao);
-
-        // Verifique se as conversões deram certo
-        if (isNaN(parsedAreaTotal) || isNaN(parsedAreaAgricultavel) || isNaN(parsedAreaVegetacao)) {
-            res.status(400).json({ message: "Áreas devem ser números válidos." });
-            return;
-        }
-
         const produtores = await prisma.produtores.create({
             data: {
                 produtorId,
@@ -68,9 +57,9 @@ export const createProdutor = async (req: Request, res: Response): Promise<void>
                 nomeFazenda,
                 cidade,
                 estado,
-                areaTotal: parsedAreaTotal,
-                areaAgricultavel: parsedAreaAgricultavel,
-                areaVegetacao: parsedAreaVegetacao,
+                areaTotal,
+                areaAgricultavel,
+                areaVegetacao,
                 culturas,
                 createdAt: createdAt ? new Date(createdAt) : undefined,
                 updatedAt: updatedAt ? new Date(updatedAt) : undefined,

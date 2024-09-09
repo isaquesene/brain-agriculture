@@ -40,15 +40,6 @@ const createProdutor = (req, res) => __awaiter(void 0, void 0, void 0, function*
             res.status(400).json({ message: "Campos obrigatórios estão faltando." });
             return;
         }
-        // Conversão de strings para números, se necessário
-        const parsedAreaTotal = parseFloat(areaTotal);
-        const parsedAreaAgricultavel = parseFloat(areaAgricultavel);
-        const parsedAreaVegetacao = parseFloat(areaVegetacao);
-        // Verifique se as conversões deram certo
-        if (isNaN(parsedAreaTotal) || isNaN(parsedAreaAgricultavel) || isNaN(parsedAreaVegetacao)) {
-            res.status(400).json({ message: "Áreas devem ser números válidos." });
-            return;
-        }
         const produtores = yield prisma.produtores.create({
             data: {
                 produtorId,
@@ -58,9 +49,9 @@ const createProdutor = (req, res) => __awaiter(void 0, void 0, void 0, function*
                 nomeFazenda,
                 cidade,
                 estado,
-                areaTotal: parsedAreaTotal,
-                areaAgricultavel: parsedAreaAgricultavel,
-                areaVegetacao: parsedAreaVegetacao,
+                areaTotal,
+                areaAgricultavel,
+                areaVegetacao,
                 culturas,
                 createdAt: createdAt ? new Date(createdAt) : undefined,
                 updatedAt: updatedAt ? new Date(updatedAt) : undefined,
